@@ -8,6 +8,12 @@ switch ($PostData->action) {
 	case "UpdateManage":
 		require "api/UpdateManage.php";
 		break;
+		case "PostArticle":
+			require "api/PostArticle.php";
+			break;
+			case "GetArticle":
+				require "api/GetArticle.php";
+				break;
 	default:
 		$response->Error("Required action", "E0002");
 		break;
