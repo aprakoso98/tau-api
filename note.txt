@@ -1,0 +1,2 @@
+SELECT id_tipe_pesanan, customer.nama, COUNT(pesanan.id_tipe_pesanan) AS jumlah_pesanan ,COUNT(pesanan.id_customer) AS jumlah_customer    FROM customer RIGHT JOIN pesanan ON customer.id_customer = pesanan.id_customer
+GROUP BY pesanan.id_tipe_pesanan, pesanan.id_customer;
