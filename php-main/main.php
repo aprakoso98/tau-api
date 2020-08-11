@@ -332,7 +332,7 @@ function junk(){
 function checkIfKeyExist($params = [], $keyNeeded = []){
 	$params = (array) $params;
 	$data = array_map(function ($a) use ($params) {
-		return !array_key_exists($a, $params) ? false : !in_array($params[$a], ['']);
+		return array_key_exists($a, $params);
 	}, $keyNeeded);
 	return !in_array(false, $data);
 }

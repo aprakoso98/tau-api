@@ -1,5 +1,4 @@
 <?php
-$time = new TimeUtil();
 if (checkIfKeyExist($PostData, [])) {
 	$least = $PostData->part ? "WHERE part=?" : "";
 	$data = $db->ExecuteAll("SELECT * FROM tb_manage $least", $PostData->part ? [$PostData->part] : []);

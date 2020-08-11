@@ -1,5 +1,4 @@
 <?php
-$time = new TimeUtil();
 if (checkIfKeyExist($PostData, ["judul", "url", "foto", "pembuat", "deskripsi", "artikel"])) {
 	$data = $db->ExecuteAll(
 		"INSERT INTO tb_news (judul, url, foto, pembuat, deskripsi, artikel) VALUES (?,?,?,?,?,?)",
