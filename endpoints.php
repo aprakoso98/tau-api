@@ -20,6 +20,17 @@ switch ($PostData->action) {
 	case "InsertFasilitas":
 		require "api/InsertFasilitas.php";
 		break;
+	case "GetStaff":
+		require "api/GetStaff.php";
+		break;
+	case "InsertStaff":
+		require "api/InsertStaff.php";
+	case "GetGaleri":
+		require "api/GetGaleri.php";
+		break;
+	case "InsertGaleri":
+		require "api/InsertGaleri.php";
+		break;
 	default:
 		$response->Error("Required action", "E0002");
 		break;

@@ -59,14 +59,20 @@ class Upload{
 		$this->path = $param['folderPath'];
 		$this->allowed = $this->fileTypes()->$param['allowed'];
 	}
-	function base64_to_jpeg($base64Img, $name = null) {
+	function base64_to_file($base64File, $name = null) {
 		$id = $name ? $name : gen_uuid();
+		$format = explode(";", $base64File);
+		$format = explode("/", $format[0]);
+		$format = $format[1];
 		$path = $this->path;
-		$output_file = sprintf("%s%s.jpg", $path, $id);
-		$data = explode( ',', $base64Img );
+		$output_file = sprintf("%s%s.$format", $path, $id);
+		$data = explode( ',', $base64File );
 		$data = base64_decode($data[1]);
 		file_put_contents($output_file, $data);
-		return sprintf("%s.jpg", $id);
+		return sprintf("%s.$format", $id);
+	}
+	function base64_to_jpeg($base64Img, $name = null) {
+		return $this->base64_to_jpeg($base64Img, $name);
 	}
 	function checkDir(){
 		if(!is_dir($this->path)){
