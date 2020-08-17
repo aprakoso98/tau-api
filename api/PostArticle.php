@@ -1,8 +1,9 @@
 <?php
+$upload = new Upload();
 if (checkIfKeyExist($PostData, ["judul", "url", "foto", "pembuat", "deskripsi", "artikel"])) {
 	$data = $db->ExecuteAll(
 		"INSERT INTO tb_news (judul, url, foto, pembuat, deskripsi, artikel) VALUES (?,?,?,?,?,?)",
-		[$PostData->judul, $PostData->url, str_split($PostData->foto, 50), $PostData->pembuat, $PostData->deskripsi, $PostData->artikel]
+		[$PostData->judul, $PostData->url || gen_uuid(), $upload->base64_to_file($PostData->foto), $PostData->pembuat, $PostData->deskripsi, $PostData->artikel]
 	);
 	$err = $db->error();
 	if ($err[2]){

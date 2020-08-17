@@ -1,8 +1,8 @@
 {
 	"db": {
-		"host": "localhost",
-		"user": "root",
-		"pass": "",
-		"selectdb": "tau_cms"
+	 "host": "localhost",
+	 "user": "ruangmember",
+	 "pass": "#Passworddbnya2020",
+	 "selectdb": "tau_cms"
 	}
-}
+ }
