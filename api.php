@@ -7,7 +7,7 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 // header("Access-Control-Max-Age: 86400");
 $path = "";
 $filename = $path . "./config.json";
-// $filename = file_exists($filename) ? $filename : $path . "/config_prod.json";
+$filename = file_exists($filename) ? $filename : $path . "/config-prod.json";
 $GLOBALS['config'] = json_decode(file_get_contents($filename));
 
 require $path . "./php-main/main.php";
