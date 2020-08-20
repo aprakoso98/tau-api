@@ -1,5 +1,4 @@
 <?php
-$debug = true;
 if (checkIfKeyExist($PostData, ["nama"])) {
 	$db->ExecuteAll(
 		"INSERT INTO tb_program_s1 (nama) VALUES (?)",

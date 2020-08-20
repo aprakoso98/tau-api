@@ -1,5 +1,4 @@
 <?php
-$debug = true;
 if (checkIfKeyExist($PostData, [])) {
 	$data = $db->ExecuteAll("SELECT * FROM tb_galeri", []);
 	$response->Success($data);
