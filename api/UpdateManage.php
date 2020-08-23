@@ -1,5 +1,5 @@
 <?php
-$upload = new Upload();
+$upload = new Upload(['folderPath' => 'files/']);
 if (checkIfKeyExist($PostData, ["part", "content", "image"])) {
 	$parts = $db->Execute("SELECT * FROM tb_manage WHERE part=?", [$PostData->part]);
 	if ($parts) {

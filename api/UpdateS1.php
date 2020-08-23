@@ -1,5 +1,5 @@
 <?php
-$upload = new Upload();
+$upload = new Upload(['folderPath' => 'files/']);
 $keys = ["nama_prodi", "deskripsi_prodi", "visi_prodi", "misi_prodi", "kurikulum_prodi", "foto_prodi", "kompetensi_prodi", "dosen_prodi", "id"];
 if (checkIfKeyExist($PostData, $keys)) {
 	$data = [];

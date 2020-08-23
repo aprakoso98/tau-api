@@ -55,11 +55,20 @@ switch ($PostData->action) {
 	case "GetProgramStudiKategori":
 		require "api/GetProgramStudiKategori.php";
 		break;
-	case "GetGambar":
-		require "api/GetGambar.php";
+	case "GetFiles":
+		require "api/GetFiles.php";
 		break;
-	case "UpdateGambar":
-		require "api/UpdateGambar.php";
+	case "UpdateFile":
+		require "api/UpdateFile.php";
+		break;
+	case "GetBanner":
+		require "api/GetBanner.php";
+		break;
+	case "UpdateBanner":
+		require "api/UpdateBanner.php";
+		break;
+	case "GetArticleSet":
+		require "api/GetArticleSet.php";
 		break;
 	default:
 		$response->Error("Required action", "E0002");

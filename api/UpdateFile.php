@@ -1,51 +1,50 @@
 <?php
-function execSql($sql, $param)
-{
+function execSql($sql, $param){
 	global $db;
 	$db->Execute($sql, $param);
-	return $db->error();
+	$err = $db->error();
+	return $err;
 }
 
-$upload = new Upload(['folderPath' => 'images/article/']);
+$upload = new Upload(['folderPath' => 'files/']);
 if (checkIfKeyExist($PostData, ["data"])) {
-	// $data = $db->ExecuteAll("SELECT * FROM tb_gambar", []);
 	$insert = [];
 	$update = [];
 	$delete = [];
-	foreach ($PostData->data as $img) {
-		if ($img->deleted && $img->id) {
-			array_push($delete, $img->id);
-		} else if ($img->changed) {
-			if ($img->id) {
-				array_push($update, $img->id, $img->name);
+	foreach ($PostData->data as $file) {
+		if ($file->deleted && $file->id) {
+			array_push($delete, $file->id);
+		} else if ($file->changed) {
+			if ($file->id) {
+				array_push($update, $file->id, $file->name);
 			} else {
-				$image = $upload->base64_to_file($img->image);
-				array_push($insert, $image, $img->name);
+				$fileData = $upload->base64_to_file($file->file);
+				array_push($insert, $fileData, $file->name, $file->format);
 			}
 		} else {
-			if ($img->image) {
-				$image = $upload->base64_to_file($img->image);
-				array_push($insert, $image, $img->name);
+			if ($file->file) {
+				$fileData = $upload->base64_to_file($file->file);
+				array_push($insert, $fileData, $file->name, $file->format);
 			}
 		}
 	}
 	if (count($insert) > 0) {
 		$p = join(",", array_map(function ($a) {
 			return $a;
-		}, array_fill(0, count($insert) / 2, "(?,?)")));
-		$sqlInsert = "INSERT INTO tb_gambar (image, name) VALUES $p";
+		}, array_fill(0, count($insert) / 3, "(?,?,?)")));
+		$sqlInsert = "INSERT INTO tb_files (file, name, format) VALUES $p";
 	}
 	if (count($delete) > 0) {
 		$p = join(",", array_map(function ($a) {
 			return $a;
 		}, array_fill(0, count($delete), "?")));
-		$sqlDelete = "DELETE FROM tb_gambar WHERE id IN ($p)";
+		$sqlDelete = "DELETE FROM tb_files WHERE id IN ($p)";
 	}
 	if (count($update) > 0) {
 		$p = join(",", array_map(function ($a) {
 			return $a;
 		}, array_fill(0, count($update) / 2, "(?,?)")));
-		$sqlUpdate = "INSERT INTO tb_gambar (id, name) VALUES $p ON DUPLICATE KEY UPDATE name = VALUES (name)";
+		$sqlUpdate = "INSERT INTO tb_files (id, name) VALUES $p ON DUPLICATE KEY UPDATE name = VALUES (name)";
 	}
 	$toExec = [[$sqlInsert, $insert], [$sqlUpdate, $update], [$sqlDelete, $delete]];
 	$isSuccess = true;

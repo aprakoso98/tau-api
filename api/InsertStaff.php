@@ -1,5 +1,5 @@
 <?php
-$upload = new Upload();
+$upload = new Upload(['folderPath' => 'files/']);
 if (checkIfKeyExist($PostData, ["data"])) {
 	$data = $PostData->data;
 	foreach ($data as $i => $d) {

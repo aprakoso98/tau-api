@@ -59,7 +59,7 @@ class Upload{
 		$this->path = $param['folderPath'];
 		$this->allowed = $this->fileTypes()->$param['allowed'];
 	}
-	function base64_to_file($base64File, $name = null) {
+	function base64_to_file($base64File, $name = null, $withFormat = false) {
 		$id = $name ? $name : gen_uuid();
 		$format = explode(";", $base64File);
 		$format = explode("/", $format[0]);
@@ -69,6 +69,8 @@ class Upload{
 		$data = explode( ',', $base64File );
 		$data = base64_decode($data[1]);
 		file_put_contents($output_file, $data);
+		if ($withFormat)
+			return [sprintf("%s.$format", $id), $format];
 		return sprintf("%s.$format", $id);
 	}
 	function base64_to_jpeg($base64Img, $name = null) {
