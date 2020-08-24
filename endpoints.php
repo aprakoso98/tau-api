@@ -14,6 +14,11 @@ switch ($PostData->action) {
 	case "GetArticle":
 		require "api/GetArticle.php";
 		break;
+	case "EditArticle":
+		require "api/EditArticle.php";
+	case "RemoveArticle":
+		require "api/RemoveArticle.php";
+		break;
 	case "GetFasilitas":
 		require "api/GetFasilitas.php";
 		break;
@@ -69,6 +74,9 @@ switch ($PostData->action) {
 		break;
 	case "GetArticleSet":
 		require "api/GetArticleSet.php";
+		break;
+	case "SetArticleSet":
+		require "api/SetArticleSet.php";
 		break;
 	default:
 		$response->Error("Required action", "E0002");
