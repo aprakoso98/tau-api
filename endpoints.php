@@ -78,6 +78,15 @@ switch ($PostData->action) {
 	case "SetArticleSet":
 		require "api/SetArticleSet.php";
 		break;
+	case "InsertAdvisors":
+		require "api/InsertAdvisors.php";
+		break;
+	case "HideAdvisors":
+		require "api/HideAdvisors.php";
+		break;
+	case "GetAdvisors":
+		require "api/GetAdvisors.php";
+		break;
 	default:
 		$response->Error("Required action", "E0002");
 		break;
