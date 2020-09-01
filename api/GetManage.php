@@ -1,7 +1,7 @@
 <?php
 if (checkIfKeyExist($PostData, [])) {
 	$least = $PostData->part ? "WHERE part=?" : "";
-	$data = $db->ExecuteAll("SELECT * FROM tb_manage $least", $PostData->part ? [$PostData->part] : []);
+	$data = $db->ExecuteAll("SELECT * FROM tb_manage $least ORDER BY id ASC", $PostData->part ? [$PostData->part] : []);
 	if (count($data) > 0) {
 		if (count($data) == 1) {
 			$data = $data[0];
