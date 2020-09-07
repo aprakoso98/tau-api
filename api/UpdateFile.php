@@ -1,5 +1,6 @@
 <?php
-function execSql($sql, $param){
+function execSql($sql, $param)
+{
 	global $db;
 	$db->Execute($sql, $param);
 	$err = $db->error();
@@ -28,19 +29,27 @@ if (checkIfKeyExist($PostData, ["data"])) {
 			}
 		}
 	}
+	$succResponse = [];
+	$succMod = 0;
 	if (count($insert) > 0) {
+		$succResponse = $insert;
+		$succMod = 3;
 		$p = join(",", array_map(function ($a) {
 			return $a;
 		}, array_fill(0, count($insert) / 3, "(?,?,?)")));
 		$sqlInsert = "INSERT INTO tb_files (file, name, format) VALUES $p";
 	}
 	if (count($delete) > 0) {
+		$succResponse = $delete;
+		$succMod = 1;
 		$p = join(",", array_map(function ($a) {
 			return $a;
 		}, array_fill(0, count($delete), "?")));
 		$sqlDelete = "DELETE FROM tb_files WHERE id IN ($p)";
 	}
 	if (count($update) > 0) {
+		$succResponse = $update;
+		$succMod = 2;
 		$p = join(",", array_map(function ($a) {
 			return $a;
 		}, array_fill(0, count($update) / 2, "(?,?)")));
@@ -58,7 +67,11 @@ if (checkIfKeyExist($PostData, ["data"])) {
 		}
 	}
 	if ($isSuccess === true) {
-		$response->Success('Berhasil');
+		$response->Success([
+			'msg' => 'Berhasil',
+			'files' => $succResponse,
+			'mod' => $succMod
+		]);
 	} else {
 		$response->Error($isSuccess);
 	}
