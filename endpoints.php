@@ -16,6 +16,7 @@ switch ($PostData->action) {
 		break;
 	case "EditArticle":
 		require "api/EditArticle.php";
+		break;
 	case "RemoveArticle":
 		require "api/RemoveArticle.php";
 		break;
@@ -30,6 +31,7 @@ switch ($PostData->action) {
 		break;
 	case "InsertStaff":
 		require "api/InsertStaff.php";
+		break;
 	case "GetGaleri":
 		require "api/GetGaleri.php";
 		break;
