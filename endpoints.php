@@ -2,6 +2,9 @@
 // error_reporting(0);
 $debug = false;
 switch ($PostData->action) {
+	case "RemoveData":
+		require "api/RemoveData.php";
+		break;
 	case "GetManage":
 		require "api/GetManage.php";
 		break;
