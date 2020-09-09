@@ -7,7 +7,17 @@ if (checkIfKeyExist($PostData, [])) {
 		$response->Success($data);
 	} else {
 		$length = $db->Execute("SELECT count(*) AS total FROM tb_news", []);
-		$data = $db->ExecuteAll("SELECT id, judul, deskripsi, foto, url, pembuat, tgl FROM tb_news ORDER BY id DESC", []);
+		$length->limit = 20;
+		if (checkIfKeyExist($PostData, ["from", "limit"])) {
+			$from = $PostData->from;
+			$limit = $PostData->limit;
+			$data = $db->ExecuteAll(
+				"SELECT id, judul, deskripsi, foto, url, pembuat, tgl FROM tb_news ORDER BY id DESC LIMIT $from, $limit",
+				[]
+			);
+		} else {
+			$data = $db->ExecuteAll("SELECT id, judul, deskripsi, foto, url, pembuat, tgl FROM tb_news ORDER BY id DESC LIMIT $length->limit", []);
+		}
 		$length->data = $data;
 		$response->Success($length);
 	}
