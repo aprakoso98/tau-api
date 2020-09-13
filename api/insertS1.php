@@ -1,13 +1,13 @@
 <?php
 $upload = new Upload(['folderPath' => 'files/']);
-$keys = ["id_program", "nama_prodi", "deskripsi_prodi", /* "foto_prodi", */ "visi_prodi", "misi_prodi", "kurikulum_prodi", "kompetensi_prodi", "dosen_prodi"];
+$keys = ["id_program", "nama_prodi", "deskripsi_prodi", "foto_prodi", "visi_prodi", "misi_prodi", "kurikulum_prodi", "kompetensi_prodi", "dosen_prodi"];
 if (checkIfKeyExist($PostData, $keys)) {
 	$data = [];
 	foreach ($keys as $key) {
 		if ($key === 'foto_prodi') {
-			// $foto = $PostData->$key;
-			// $foto = $upload->base64_to_file($foto);
-			// array_push($data, $foto);
+			$foto = $PostData->$key;
+			$foto = $upload->base64_to_file($foto);
+			array_push($data, $foto);
 		} else {
 			array_push($data, $PostData->$key);
 		}

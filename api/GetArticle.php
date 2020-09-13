@@ -7,7 +7,7 @@ if (checkIfKeyExist($PostData, [])) {
 		$response->Success($data);
 	} else {
 		$length = $db->Execute("SELECT count(*) AS total FROM tb_news", []);
-		$length->limit = 20;
+		$length->limit = 15;
 		if (checkIfKeyExist($PostData, ["from", "limit"])) {
 			$from = $PostData->from;
 			$limit = $PostData->limit;

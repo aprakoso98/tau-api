@@ -15,11 +15,6 @@ if (checkIfKeyExist($PostData, ["id", "judul", "url", "foto", "pembuat", "deskri
 	} else {
 		$response->Success("Berhasil edit artikel");
 	}
-	// $response->Error(["UPDATE tb_news SET judul=?, url=?, foto=?, pembuat=?, deskripsi=?, artikel=? WHERE id=?",[
-	// 	$PostData->judul, $PostData->url,
-	// 	strlen($PostData->foto) > 50 ? $upload->base64_to_file($PostData->foto) : $PostData->foto,
-	// 	$PostData->pembuat, $PostData->deskripsi, $PostData->artikel, $PostData->id
-	// ]]);
 } else {
 	$response->Error("Please Check Parameters");
 }

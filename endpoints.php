@@ -41,6 +41,9 @@ switch ($PostData->action) {
 	case "InsertGaleri":
 		require "api/InsertGaleri.php";
 		break;
+	case "DeleteS1":
+		require "api/DeleteS1.php";
+		break;
 	case "GetS1":
 		require "api/GetS1.php";
 		break;
