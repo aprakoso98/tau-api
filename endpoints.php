@@ -2,6 +2,9 @@
 // error_reporting(0);
 $debug = false;
 switch ($PostData->action) {
+	case "ChangeOrder":
+		require "api/ChangeOrder.php";
+		break;
 	case "RemoveData":
 		require "api/RemoveData.php";
 		break;
