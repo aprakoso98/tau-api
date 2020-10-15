@@ -7,8 +7,9 @@ function execSql($sql, $param)
 	return $err;
 }
 
-$upload = new Upload(['folderPath' => 'files/']);
 if (checkIfKeyExist($PostData, ["data"])) {
+	$path = $PostData->path ? $PostData->path : "";
+	$upload = new Upload(['folderPath' => join("/", ['files', $path])]);
 	$insert = [];
 	$update = [];
 	$delete = [];
@@ -68,6 +69,7 @@ if (checkIfKeyExist($PostData, ["data"])) {
 	}
 	if ($isSuccess === true) {
 		$response->Success([
+			'fdf' => join("/", ['files', $path]),
 			'msg' => 'Berhasil',
 			'files' => $succResponse,
 			'mod' => $succMod
