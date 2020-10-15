@@ -1,5 +1,6 @@
 <?php
-$upload = new Upload(['folderPath' => 'files/']);
+$path = "banner/";
+$upload = new Upload(['folderPath' => "files/$path"]);
 if (checkIfKeyExist($PostData, [])) {
 	if ($PostData->id) {
 		if ($PostData->delete) {
@@ -16,8 +17,9 @@ if (checkIfKeyExist($PostData, [])) {
 		}
 	} else if ($PostData->data) {
 		if (checkIfKeyExist($PostData, ['isMobile'])) {
-			$data = array_map(function ($a) use ($upload) {
+			$data = array_map(function ($a) use ($path, $upload) {
 				$image = $upload->base64_to_file($a->file);
+				$image = "$path$image";
 				return $image;
 			}, $PostData->data);
 			$isMobile = $PostData->isMobile ? 1 : 0;

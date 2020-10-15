@@ -1,11 +1,14 @@
 <?php
-$upload = new Upload(['folderPath' => 'files/']);
-if (checkIfKeyExist($PostData, ["id", "judul", "url", "foto", "pembuat", "deskripsi", "artikel"])) {
-	$data = $db->ExecuteAll(
-		"UPDATE tb_news SET judul=?, url=?, foto=?, pembuat=?, deskripsi=?, artikel=? WHERE id=?",
+$path = "article-thumb/";
+$upload = new Upload(['folderPath' => "files/$path"]);
+if (checkIfKeyExist($PostData, ["id", "tgl", "judul", "url", "foto", "pembuat", "deskripsi", "artikel"])) {
+	$image = strlen($PostData->foto) > 70 ? $upload->base64_to_file($PostData->foto) : $PostData->foto;
+	$image = strlen($PostData->foto) > 70 ? "$path$image" : $image;
+	$data = $db->Execute(
+		"UPDATE tb_news SET tgl=?, judul=?, url=?, foto=?, pembuat=?, deskripsi=?, artikel=? WHERE id=?",
 		[
-			$PostData->judul, $PostData->url,
-			strlen($PostData->foto) > 50 ? $upload->base64_to_file($PostData->foto) : $PostData->foto,
+			$PostData->tgl, $PostData->judul, $PostData->url,
+			$image,
 			$PostData->pembuat, $PostData->deskripsi, $PostData->artikel, $PostData->id
 		]
 	);

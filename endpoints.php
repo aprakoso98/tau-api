@@ -68,6 +68,9 @@ switch ($PostData->action) {
 	case "GetProgramStudiKategori":
 		require "api/GetProgramStudiKategori.php";
 		break;
+	case "UpdateFileFolder":
+		require "api/UpdateFileFolder.php";
+		break;
 	case "GetFiles":
 		require "api/GetFiles.php";
 		break;

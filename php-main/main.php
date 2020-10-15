@@ -60,6 +60,9 @@ class Upload{
 		$this->allowed = $this->fileTypes()->$param['allowed'];
 	}
 	function base64_to_file($base64File, $name = null, $withFormat = false) {
+		if (!is_dir($this->path)){
+			mkdir($this->path, 0777, true);
+		}
 		$id = $name ? $name : gen_uuid();
 		$format = explode(";", $base64File);
 		$format = explode("/", $format[0]);
