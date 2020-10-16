@@ -6,6 +6,12 @@ if (checkIfKeyExist($PostData, [])) {
 		if ($PostData->delete) {
 			$db->Execute("DELETE FROM tb_banner WHERE id=?", [$PostData->id]);
 			$response->Success("Sukses hapus banner");
+		} else if ($PostData->visible === '0' || $PostData->visible === '1') {
+			$db->Execute("UPDATE tb_banner SET visible=? WHERE id=?", [$PostData->visible, $PostData->id]);
+			$response->Success("Sukses ubah banner");
+		} else if ($PostData->link) {
+			$db->Execute("UPDATE tb_banner SET link=? WHERE id=?", [$PostData->link, $PostData->id]);
+			$response->Success("Sukses ubah banner");
 		} else {
 			if (checkIfKeyExist($PostData, ['isMobile'])) {
 				$db->Execute("UPDATE tb_banner SET isForBanner=? WHERE mobile=?", ["0", $PostData->isMobile ? 1 : 0]);
