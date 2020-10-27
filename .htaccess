@@ -1,4 +1,4 @@
 # RewriteEngine On
 # RewriteCond %{HTTPS} !=on
 # RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
-# Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Origin "*"
