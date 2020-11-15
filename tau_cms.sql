@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 25, 2020 at 09:58 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.1
+-- Generation Time: Nov 15, 2020 at 10:22 AM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.3.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -68,23 +67,22 @@ INSERT INTO `tb_article_set` (`id`, `part`, `url`) VALUES
 
 CREATE TABLE `tb_banner` (
   `id` int(11) NOT NULL,
+  `isForBanner` int(11) NOT NULL DEFAULT 0,
+  `mobile` int(11) DEFAULT 0,
+  `position` int(11) NOT NULL DEFAULT 0,
+  `visible` int(11) NOT NULL DEFAULT 1,
   `image` varchar(50) DEFAULT NULL,
-  `isForBanner` int(11) NOT NULL DEFAULT 0
+  `link` varchar(50) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_banner`
 --
 
-INSERT INTO `tb_banner` (`id`, `image`, `isForBanner`) VALUES
-(1, '288e11ea-601b-41fd-a86d-b5147ef78fd9.png', 1),
-(3, 'b868fe2b-bf17-45cb-9f9a-926413466eef.png', 0),
-(4, '54425067-8c00-471b-bca0-92b9077b18e6.png', 0),
-(5, 'f4dfd227-a818-48fa-9940-581d4e48b66e.png', 0),
-(6, 'd6957036-c1d8-4601-b469-7c6fd080b3cf.png', 0),
-(7, 'a90fed45-28a4-4d75-8c36-eb6e8c619e87.png', 0),
-(8, '4b2dd43c-8946-4fb7-9858-a92992507078.png', 0),
-(9, '8ac98655-1288-451e-95f9-09b7eb05a443.png', 0);
+INSERT INTO `tb_banner` (`id`, `isForBanner`, `mobile`, `position`, `visible`, `image`, `link`) VALUES
+(19, 0, 0, 1, 1, 'banner/47565ee0-7057-4f65-9aec-4dcd0e41ac87.png', 'tentang/misi'),
+(22, 0, 0, 2, 1, 'banner/87612688-1059-4167-9387-145ba8c658ec.png', 'https://google.com'),
+(23, 0, 0, 0, 1, 'banner/47565ee0-7057-4f65-9aec-4dcd0e41ac87.png', '/tentang/visi');
 
 -- --------------------------------------------------------
 
@@ -110,22 +108,19 @@ CREATE TABLE `tb_fasilitas` (
   `id` bigint(20) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `foto` varchar(100) NOT NULL,
-  `deskripsi` varchar(500) DEFAULT NULL
+  `deskripsi` varchar(500) DEFAULT NULL,
+  `position` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_fasilitas`
 --
 
-INSERT INTO `tb_fasilitas` (`id`, `nama`, `foto`, `deskripsi`) VALUES
-(4, 'udin', 'af119aa8-1795-44cd-a55d-62e9902c28a2.jpg', NULL),
-(5, 'gedung', '1a90ac92-052c-414a-9afa-ddb7c187ae2e.jpg', NULL),
-(6, 'kolam', 'c04b321f-0ce4-4210-8cf1-84fc245c2b0f.jpg', NULL),
-(7, 'gym', '1b54c80f-65f4-4f8f-9140-5fd5a60c8957.jpg', NULL),
-(8, 'tempat xxx', '3247c993-f6be-4d53-8239-38bd63a28298.jpg', NULL),
-(9, 'party night', 'b3acbe46-dccd-412f-b1ec-7ae4bb213ac9.jpg', NULL),
-(10, 'atau dah ini apa', '52d7a479-1c10-49da-bd15-54634af17404.png', NULL),
-(11, 'contoh', '2bc0cf66-5ad0-4131-acff-9c2a3f394935.png', NULL);
+INSERT INTO `tb_fasilitas` (`id`, `nama`, `foto`, `deskripsi`, `position`) VALUES
+(12, 'sdfsdf', '70a7eecf-c859-4f2a-bc53-d3365ccbc304.png', NULL, 2),
+(13, 'asdasd', 'd6ad68cf-55a4-4a76-a6c5-c42d7522d9a1.png', NULL, 0),
+(14, 'asdsad', '76b6edc7-cd7d-4f7b-8b15-809e649cd443.png', NULL, 1),
+(16, 'ddas', '87612688-1059-4167-9387-145ba8c658ec.png', NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -137,28 +132,28 @@ CREATE TABLE `tb_files` (
   `id` int(11) NOT NULL,
   `name` varchar(50) DEFAULT NULL,
   `file` varchar(50) DEFAULT NULL,
-  `format` varchar(50) DEFAULT NULL
+  `format` varchar(50) DEFAULT NULL,
+  `folder` varchar(50) DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_files`
 --
 
-INSERT INTO `tb_files` (`id`, `name`, `file`, `format`) VALUES
-(1, 'add', '0e0fd253-e314-4455-a268-0818078fc8b1.png', 'png'),
-(3, 'dssd', 'fa075c33-129f-4f6e-b7bc-ffbd4ef6e33e.txt', 'txt'),
-(4, 'aa', 'c04b321f-0ce4-4210-8cf1-84fc245c2b0f.jpg', 'jpg'),
-(5, 'dssddsds', 'd5dc66fd-3a29-49fc-848a-05453d1143df.mp4', 'mp4'),
-(7, 'cc', '6ec3f677-d9ad-4edd-9116-d42b388b2aeb.jpeg', 'jpg'),
-(8, 'Screenshot (1)', '2f15835e-07b2-4a56-b810-6fb67a14ae26.png', 'png'),
-(9, 'StarUML_HBZwNafuYd', 'b868fe2b-bf17-45cb-9f9a-926413466eef.png', 'png'),
-(10, 'StarUML_Cw1SbwVvG7', '474b0495-8396-4594-b98b-7238e28fc042.png', 'png'),
-(11, 'chrome_XULPoP7KXp', '54425067-8c00-471b-bca0-92b9077b18e6.png', 'png'),
-(12, 'aDZQElZ54I', 'e3e67f50-b30f-4cbf-b261-0a1423fb641f.mp4', 'mp4'),
-(13, 'player_783EAJHR90', 'a936a4a6-f7da-4cbb-a4ad-063f1ebe91ab.png', 'png'),
-(14, '41xMgVgt5p', '3bc39035-78b2-44fc-baaf-0c7eb60d8bde.mp4', 'mp4'),
-(15, 'chrome_H1wX4yhj8T', '288e11ea-601b-41fd-a86d-b5147ef78fd9.png', 'png'),
-(16, 'StarUML_XQZFgFHnIg', 'e5e1ffd2-f012-4dcf-95ec-4dece624b022.png', 'png');
+INSERT INTO `tb_files` (`id`, `name`, `file`, `format`, `folder`) VALUES
+(17, 'msedge_HyaBmLxzHn', '1948819e-9e9d-4aa2-9b50-864df67997c8.png', 'png', ''),
+(18, 'sfd', 'bd301e57-0328-43bb-bb6f-ae6565424547.png', 'png', 'article'),
+(19, 'fffgdg', '1948819e-9e9d-4aa2-9b50-864df67997c8.png', 'png', 'article'),
+(21, 'chrome_znyi5Ol9n7', 'bd301e57-0328-43bb-bb6f-ae6565424547.png', 'png', 'article'),
+(30, 'Widy', '178e8d7b-b80d-46f7-a4ea-20b634cebce1.png', 'png', ''),
+(31, 'Photo (blue)', '50c06925-1c7f-4310-b5e9-ca9a633e6905.png', 'png', ''),
+(32, 'Photo (blue)', '4ad549b9-72df-432a-bf70-612b3a38c83a.png', 'png', ''),
+(33, 'chrome_rq1iJK65f6', '891c8fa5-008b-4328-b2f1-38301d5f0bcb.png', 'png', ''),
+(34, 'chrome_rq1iJK65f6', '64b64179-a6d1-4518-99d1-8916633cc81a.png', 'png', ''),
+(35, 'chrome_rq1iJK65f6', 'e88ad412-39f6-49de-b9e7-f16cf64598a8.png', 'png', ''),
+(36, 'chrome_rq1iJK65f6', '9ebbdb2a-0a81-48b0-a27b-2053bdae2cd3.png', 'png', ''),
+(37, 'chrome_rq1iJK65f6', '356c661a-6ea1-4b4f-9af5-a6dc9a6776b9.png', 'png', ''),
+(38, 'chrome_rq1iJK65f6', '0ef54654-f46d-4df9-8fde-1334cf9deb58.png', 'png', '');
 
 -- --------------------------------------------------------
 
@@ -171,22 +166,19 @@ CREATE TABLE `tb_galeri` (
   `nama` varchar(100) DEFAULT NULL,
   `deskripsi` varchar(100) DEFAULT NULL,
   `media` varchar(100) DEFAULT NULL,
-  `is_video` tinyint(1) DEFAULT NULL
+  `is_video` tinyint(1) DEFAULT NULL,
+  `position` int(11) NOT NULL DEFAULT 0,
+  `fromFile` int(11) NOT NULL DEFAULT 0,
+  `is_embed` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_galeri`
 --
 
-INSERT INTO `tb_galeri` (`id`, `nama`, `deskripsi`, `media`, `is_video`) VALUES
-(11, 'add', 'ddfd', '6ee0bf5c-b8fa-41ca-a3cc-3fad9e7dfb76.mp4', 1),
-(12, 'dadsd', 'fssf', '77f20cb7-23ee-4584-a04f-5b976616be9a.png', 0),
-(13, 'video', 'hfjsfhskjgfjfk', '26cd4e98-05f3-40b0-8f70-e09daef66403.mp4', 1),
-(14, 'image', 'jf;jdfksfsfhfsmsf', 'bc757473-2b10-435e-8a0f-10956499620e.png', 0),
-(15, 'kamping', 'di mana gitu', 'b64f55aa-897c-473c-aafa-ba2726d92231.mp4', 1),
-(16, 'gadkh', 'kshf', '94a660c9-e3ca-473f-8ae4-ef9fb26e8cae.png', 0),
-(17, 'ssd', 'ddd', 'c4f329cf-259f-4145-b8a1-d10ded4438aa.png', 0),
-(18, 'ddsd', 'ddsd', '81f8a0b8-f078-4f99-b163-ae175aca4d52.mp4', 1);
+INSERT INTO `tb_galeri` (`id`, `nama`, `deskripsi`, `media`, `is_video`, `position`, `fromFile`, `is_embed`) VALUES
+(16, 'gadkh', 'kshf', '94a660c9-e3ca-473f-8ae4-ef9fb26e8cae.png', 0, 0, 0, NULL),
+(19, '', '', '17', 0, 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -240,7 +232,10 @@ INSERT INTO `tb_manage` (`id`, `part`, `content`, `image`) VALUES
 (7, 'struktur', 'Deskripsi struktur', NULL),
 (8, 'sertifikasi', 'sertifikasi adalah lorem ipsum', NULL),
 (9, 's1', 'Deskripsi s1dddsdsd', NULL),
-(10, 'international', 'Deskripsi international', NULL);
+(10, 'international', 'Deskripsi international', NULL),
+(11, 'kontakFacebook', 'https://fb.com/aprakoso98', NULL),
+(12, 'kontakWhatsapp', 'https://wa.me/6256567878', NULL),
+(13, 'urlRegistrasi', '/daftar-online', NULL);
 
 -- --------------------------------------------------------
 
@@ -256,21 +251,28 @@ CREATE TABLE `tb_news` (
   `foto` varchar(100) NOT NULL,
   `url` varchar(100) NOT NULL,
   `pembuat` varchar(100) NOT NULL,
-  `tgl` datetime NOT NULL DEFAULT current_timestamp()
+  `tgl` datetime NOT NULL DEFAULT current_timestamp(),
+  `hideTanggal` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_news`
 --
 
-INSERT INTO `tb_news` (`id`, `judul`, `deskripsi`, `artikel`, `foto`, `url`, `pembuat`, `tgl`) VALUES
-(1, 'TAU Training Center', 'sdfhsdjkfl', 'jksdfjsdf', '1a90ac92-052c-414a-9afa-ddb7c187ae2e.jpg', 'training-center', 'kjfs', '2020-08-10 02:09:19'),
-(2, 'Fast Track To Australian University', 'sdfhsdjkfl', 'jksdfjsdf', '77f20cb7-23ee-4584-a04f-5b976616be9a.png', 'international-australian', 'kjfs', '2020-08-10 02:11:21'),
-(3, 'International Bussiness Program', 'sdfhsdjkfl', 'jksdfjsdf', '94a660c9-e3ca-473f-8ae4-ef9fb26e8cae.png', 'international-business', 'kjfs', '2020-08-10 02:12:29'),
-(4, 'Kemahasiswaan', 'kjhshdj', 'fsddsfsf', '669f1fb0-0d25-4025-9aba-bef5b741dfc2.png', 'kemahasiswaan', 'kjdasdf', '2020-08-10 19:40:23'),
-(43, 'Tracer Studi', 'ddfsxc', '<p>artikel ini adalah bla</p><p>bla</p><p>bla</p>', '52d7a479-1c10-49da-bd15-54634af17404.png', 'tracer-studi', 'ffds', '2020-08-16 15:34:28'),
-(44, 'Career', 'fdcxcv', '<p>Adipisici<em>ng non Lorem ut id pariatur nostrud reprehenderit in consequat. Nisi proident cupidatat amet dolor eu eu sit ea quis amet cupidatat mollit velit id. Sunt veniam deserunt et Lorem ullamco. Labore aliquip ullamco id dolore consectetur nulla quis id anim. Eiusmod irure aliquip adipisicing qui anim. Commodo qui ad occaecat irure laborum et. Id ea nostrud amet laboris deserunt dolor commodo Lorem.\n\nQuis velit ex reprehenderit adipisicing eu commodo excepteur do duis est aute pariatur. Minim culpa sit cupidatat in reprehenderit exercitation sit proident excepteur ex dolore irure exercitation. Pariatur anim qui dolore pariatur. Consequat anim adipisicing ad excepteur sunt. Aute laborum pariatur et dolore eu ipsum deserunt adipisicing sunt enim ex amet tempor. Esse proident quis reprehenderit reprehenderit adipisicing aute sint id nulla lab</em>orum. Deserunt enim in consequat enim excepteur qui.\n\nCommodo ex cupidatat laboris ullamco mollit. Labore Lorem esse ea officia duis ad id pariatur laborum. Amet excepteur amet reprehenderit officia sit enim veniam Lorem qui. Occaecat culpa ipsum consectetur mollit cupidatat ad cupidatat adipisicing officia aliqua excepteur duis dolore. Consectetur quis sunt amet ad velit laboris cupidatat incididunt exercitation. Excepteur deserunt sint anim culpa nostrud minim pariatur laborum id aute exercitation nostrud. Ut mollit commodo laboris sunt dolore adipisicing.\n\nIncididunt Lorem est nisi quis. Ut velit commodo culpa cupidatat ea in sunt. Consectetur nisi aliqua excepteur minim voluptate ut voluptate anim voluptate esse enim exercitation sit in.\n\nEt eiusmod enim excepteur nostrud velit cillum excepteur aliquip reprehenderit nostrud. Lorem officia eu commodo laborum. Veniam minim velit excepteur aliqua. Aute nisi do ullamco duis consectetur sit proident quis laborum ad. Ea eiusmod qui excepteur irure quis culpa minim. Duis consectetur officia reprehenderit pariatur in. Qui officia aute quis incididunt esse deserunt qui.</p>', '669f1fb0-0d25-4025-9aba-bef5b741dfc2.png', 'career', 'wewewe', '2020-08-16 15:49:30'),
-(45, 'Beasiswa', 'fdcxcv', '<p>Adipisici<em>ng non Lorem ut id pariatur nostrud reprehenderit in consequat. Nisi proident cupidatat amet dolor eu eu sit ea quis amet cupidatat mollit velit id. Sunt veniam deserunt et Lorem ullamco. Labore aliquip ullamco id dolore consectetur nulla quis id anim. Eiusmod irure aliquip adipisicing qui anim. Commodo qui ad occaecat irure laborum et. Id ea nostrud amet laboris deserunt dolor commodo Lorem.\n\nQuis velit ex reprehenderit adipisicing eu commodo excepteur do duis est aute pariatur. Minim culpa sit cupidatat in reprehenderit exercitation sit proident excepteur ex dolore irure exercitation. Pariatur anim qui dolore pariatur. Consequat anim adipisicing ad excepteur sunt. Aute laborum pariatur et dolore eu ipsum deserunt adipisicing sunt enim ex amet tempor. Esse proident quis reprehenderit reprehenderit adipisicing aute sint id nulla lab</em>orum. Deserunt enim in consequat enim excepteur qui.\n\nCommodo ex cupidatat laboris ullamco mollit. Labore Lorem esse ea officia duis ad id pariatur laborum. Amet excepteur amet reprehenderit officia sit enim veniam Lorem qui. Occaecat culpa ipsum consectetur mollit cupidatat ad cupidatat adipisicing officia aliqua excepteur duis dolore. Consectetur quis sunt amet ad velit laboris cupidatat incididunt exercitation. Excepteur deserunt sint anim culpa nostrud minim pariatur laborum id aute exercitation nostrud. Ut mollit commodo laboris sunt dolore adipisicing.\n\nIncididunt Lorem est nisi quis. Ut velit commodo culpa cupidatat ea in sunt. Consectetur nisi aliqua excepteur minim voluptate ut voluptate anim voluptate esse enim exercitation sit in.\n\nEt eiusmod enim excepteur nostrud velit cillum excepteur aliquip reprehenderit nostrud. Lorem officia eu commodo laborum. Veniam minim velit excepteur aliqua. Aute nisi do ullamco duis consectetur sit proident quis laborum ad. Ea eiusmod qui excepteur irure quis culpa minim. Duis consectetur officia reprehenderit pariatur in. Qui officia aute quis incididunt esse deserunt qui.</p>', '94a660c9-e3ca-473f-8ae4-ef9fb26e8cae.png', 'beasiswa', 'wewewe', '2020-08-16 15:49:43');
+INSERT INTO `tb_news` (`id`, `judul`, `deskripsi`, `artikel`, `foto`, `url`, `pembuat`, `tgl`, `hideTanggal`) VALUES
+(1, 'TAU Training Center', 'sdfhsdjkfl', 'jksdfjsdf', '1a90ac92-052c-414a-9afa-ddb7c187ae2e.jpg', 'training-center', 'kjfs', '2020-08-10 02:09:19', 0),
+(2, 'Fast Track To Australian University', 'sdfhsdjkfl', 'jksdfjsdf', '77f20cb7-23ee-4584-a04f-5b976616be9a.png', 'international-australian', 'kjfs', '2020-08-10 02:11:21', 0),
+(3, 'International Bussiness Program', 'sdfhsdjkfl', 'jksdfjsdf', '94a660c9-e3ca-473f-8ae4-ef9fb26e8cae.png', 'international-business', 'kjfs', '2020-08-10 02:12:29', 0),
+(4, 'Kemahasiswaan', 'kjhshdj', 'fsddsfsf', '669f1fb0-0d25-4025-9aba-bef5b741dfc2.png', 'kemahasiswaan', 'kjdasdf', '2020-08-10 19:40:23', 0),
+(43, 'Tracer Studi', 'ddfsxc', '<p>artikel ini adalah bla</p><p>bla</p><p>bla</p>', '52d7a479-1c10-49da-bd15-54634af17404.png', 'tracer-studi', 'ffds', '2020-08-16 15:34:28', 0),
+(44, 'Career', 'fdcxcv', '<p>Adipisici<em>ng non Lorem ut id pariatur nostrud reprehenderit in consequat. Nisi proident cupidatat amet dolor eu eu sit ea quis amet cupidatat mollit velit id. Sunt veniam deserunt et Lorem ullamco. Labore aliquip ullamco id dolore consectetur nulla quis id anim. Eiusmod irure aliquip adipisicing qui anim. Commodo qui ad occaecat irure laborum et. Id ea nostrud amet laboris deserunt dolor commodo Lorem.\n\nQuis velit ex reprehenderit adipisicing eu commodo excepteur do duis est aute pariatur. Minim culpa sit cupidatat in reprehenderit exercitation sit proident excepteur ex dolore irure exercitation. Pariatur anim qui dolore pariatur. Consequat anim adipisicing ad excepteur sunt. Aute laborum pariatur et dolore eu ipsum deserunt adipisicing sunt enim ex amet tempor. Esse proident quis reprehenderit reprehenderit adipisicing aute sint id nulla lab</em>orum. Deserunt enim in consequat enim excepteur qui.\n\nCommodo ex cupidatat laboris ullamco mollit. Labore Lorem esse ea officia duis ad id pariatur laborum. Amet excepteur amet reprehenderit officia sit enim veniam Lorem qui. Occaecat culpa ipsum consectetur mollit cupidatat ad cupidatat adipisicing officia aliqua excepteur duis dolore. Consectetur quis sunt amet ad velit laboris cupidatat incididunt exercitation. Excepteur deserunt sint anim culpa nostrud minim pariatur laborum id aute exercitation nostrud. Ut mollit commodo laboris sunt dolore adipisicing.\n\nIncididunt Lorem est nisi quis. Ut velit commodo culpa cupidatat ea in sunt. Consectetur nisi aliqua excepteur minim voluptate ut voluptate anim voluptate esse enim exercitation sit in.\n\nEt eiusmod enim excepteur nostrud velit cillum excepteur aliquip reprehenderit nostrud. Lorem officia eu commodo laborum. Veniam minim velit excepteur aliqua. Aute nisi do ullamco duis consectetur sit proident quis laborum ad. Ea eiusmod qui excepteur irure quis culpa minim. Duis consectetur officia reprehenderit pariatur in. Qui officia aute quis incididunt esse deserunt qui.</p>', '669f1fb0-0d25-4025-9aba-bef5b741dfc2.png', 'career', 'wewewe', '2020-08-16 15:49:30', 0),
+(45, 'Beasiswa', 'fdcxcv', '<p>Adipisici<em>ng non Lorem ut id pariatur nostrud reprehenderit in consequat. Nisi proident cupidatat amet dolor eu eu sit ea quis amet cupidatat mollit velit id. Sunt veniam deserunt et Lorem ullamco. Labore aliquip ullamco id dolore consectetur nulla quis id anim. Eiusmod irure aliquip adipisicing qui anim. Commodo qui ad occaecat irure laborum et. Id ea nostrud amet laboris deserunt dolor commodo Lorem.\n\nQuis velit ex reprehenderit adipisicing eu commodo excepteur do duis est aute pariatur. Minim culpa sit cupidatat in reprehenderit exercitation sit proident excepteur ex dolore irure exercitation. Pariatur anim qui dolore pariatur. Consequat anim adipisicing ad excepteur sunt. Aute laborum pariatur et dolore eu ipsum deserunt adipisicing sunt enim ex amet tempor. Esse proident quis reprehenderit reprehenderit adipisicing aute sint id nulla lab</em>orum. Deserunt enim in consequat enim excepteur qui.\n\nCommodo ex cupidatat laboris ullamco mollit. Labore Lorem esse ea officia duis ad id pariatur laborum. Amet excepteur amet reprehenderit officia sit enim veniam Lorem qui. Occaecat culpa ipsum consectetur mollit cupidatat ad cupidatat adipisicing officia aliqua excepteur duis dolore. Consectetur quis sunt amet ad velit laboris cupidatat incididunt exercitation. Excepteur deserunt sint anim culpa nostrud minim pariatur laborum id aute exercitation nostrud. Ut mollit commodo laboris sunt dolore adipisicing.\n\nIncididunt Lorem est nisi quis. Ut velit commodo culpa cupidatat ea in sunt. Consectetur nisi aliqua excepteur minim voluptate ut voluptate anim voluptate esse enim exercitation sit in.\n\nEt eiusmod enim excepteur nostrud velit cillum excepteur aliquip reprehenderit nostrud. Lorem officia eu commodo laborum. Veniam minim velit excepteur aliqua. Aute nisi do ullamco duis consectetur sit proident quis laborum ad. Ea eiusmod qui excepteur irure quis culpa minim. Duis consectetur officia reprehenderit pariatur in. Qui officia aute quis incididunt esse deserunt qui.</p>', '94a660c9-e3ca-473f-8ae4-ef9fb26e8cae.png', 'beasiswa', 'wewewe', '2020-10-31 15:49:43', 0),
+(76, 'dsdsf', 'ddsadasd', '<p>ddsadasd</p>', 'article-thumb/57693f55-0284-4fdd-80ae-a709d44aeb8b.png', '33daa95c-39c8-4311-1296-103b8cf66791', 'asdasd', '2020-10-15 20:03:00', 0),
+(77, 'nama judul', 'asdddssad', '<h1>Itaque nostrum <img style=\"float: right; margin: 10px; width: 214px; height: 164px;\" src=\"https://xdsoft.net/jodit/files/download.jpg\" alt=\"Itaque nostrum est-quod nostrum dico, artis est-ad ea principia, quae accepimus.\">est-quod nostrum dico, artis est-ad ea principia, quae accepimus.</h1>\n\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <i>Quonam, inquit, modo?</i> <mark>Illum mallem levares, quo optimum atque humanissimum virum, Cn.</mark> Quae quidem vel cum periculo est quaerenda vobis; Amicitiam autem adhibendam esse censent,\n    quia sit ex eo genere, quae prosunt. <a href=\"http://loripsum.net/\" target=\"_blank\">Duo Reges: constructio interrete.</a> Illud quaero, quid ei, qui in voluptate summum bonum ponat, consentaneum sit dicere. At vero illa, quae Peripatetici, quae Stoici\n    dicunt, semper tibi in ore sunt in iudiciis, in senatu. Dic in quovis conventu te omnia facere, ne doleas. Nummus in Croesi divitiis obscuratur, pars est tamen divitiarum. Isto modo ne improbos quidem, si essent boni viri. Luxuriam non reprehendit,\n    modo sit vacua infinita cupiditate et timore. Sit ista in Graecorum levitate perversitas, qui maledictis insectantur eos, a quibus de veritate dissentiunt. </p>\n\n<blockquote cite=\"http://loripsum.net\">\n    Nec enim absolvi beata vita sapientis neque ad exitum perduci poterit, si prima quaeque bene ab eo consulta atque facta ipsius oblivione obruentur.\n</blockquote>\n\n\n<pre>Tum ille: Tu autem cum ipse tantum librorum habeas, quos hic\ntandem requiris?\n\nPossumusne ergo in vita summum bonum dicere, cum id ne in\ncena quidem posse videamur?\n</pre>\n\n\n<ul>\n    <li>Possumusne ergo in vita summum bonum dicere, cum id ne in cena quidem posse videamur?</li>\n    <li>Quodsi vultum tibi, si incessum fingeres, quo gravior viderere, non esses tui similis;</li>\n</ul>\n\n\n<ol>\n    <li>Qui autem diffidet perpetuitati bonorum suorum, timeat necesse est, ne aliquando amissis illis sit miser.</li>\n    <li>Nulla profecto est, quin suam vim retineat a primo ad extremum.</li>\n</ol>\n\n\n<dl>\n    <dt><dfn>Falli igitur possumus.</dfn></dt>\n    <dd>Quid enim ab antiquis ex eo genere, quod ad disserendum valet, praetermissum est?</dd>\n    <dt><dfn>Scrupulum, inquam, abeunti;</dfn></dt>\n    <dd>Scio enim esse quosdam, qui quavis lingua philosophari possint;</dd>\n    <dt><dfn>Poterat autem inpune;</dfn></dt>\n    <dd>Tum ille: Tu autem cum ipse tantum librorum habeas, quos hic tandem requiris?</dd>\n    <dt><dfn>Beatum, inquit.</dfn></dt>\n    <dd>Respondeat totidem verbis.</dd></dl>﻿', 'article-thumb/767ae296-8e1c-495e-ac91-6428f738563d.png', 'judul-nama-nya', 'sad', '2020-10-27 11:39:00', 0),
+(78, 'test lagi', 'asd', '<p>Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum&nbsp; proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lor<img src=\"$FILE_PATHarticle//4ad549b9-72df-432a-bf70-612b3a38c83a.png\" style=\"width: 70px; height: 98px; float: right;\">em ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.Voluptate in pariatur nisi veniam. Et esse sint amet Lorem aliquip incididunt Lorem ut laboris. Enim velit reprehenderit eiusmod cillum proident. Velit culpa minim sit dolore laboris ipsum.&nbsp;</p><p><br></p>', 'article-thumb/c2bb8235-a83e-41f7-a55f-2885c40ef2a3.png', '84ca5d7f-da2d-48e9-2520-a0b068d41cb5', 'asd', '2020-10-08 11:05:00', 0),
+(79, 'test image sejajar', 'dsad', '<span id=\"jodit-selection_marker_1603774935332_47318066298175987\" data-jodit-selection_marker=\"start\" style=\"line-height: 0; display: none;\">﻿</span><ol><li><img src=\"$FILE_PATHarticle//9ebbdb2a-0a81-48b0-a27b-2053bdae2cd3.png\" style=\"width: 109px; height: 151px; float: left;\">dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;dhgdsgfsdfffffffffffffffffffffffffffffff fdshhj&nbsp;</li><li>sfsdfsdf</li></ol><ul><li>asdsad</li><li>sad</li><li>asd</li><li>asd</li><li>asd</li><li>sadjhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh&nbsp;</li></ul><span id=\"jodit-selection_marker_1603774953888_5099561135934998\" data-jodit-selection_marker=\"start\" style=\"line-height: 0; display: none;\">﻿</span><p><img src=\"$FILE_PATHarticle//356c661a-6ea1-4b4f-9af5-a6dc9a6776b9.png\" style=\"width: 107px; height: 146px; float: left;\">dsahdhsahdgashgdasd<span id=\"jodit-selection_marker_1603774994500_9047972450835509\" data-jodit-selection_marker=\"start\" style=\"line-height: 0; display: none;\">﻿</span><img src=\"$FILE_PATHarticle//0ef54654-f46d-4df9-8fde-1334cf9deb58.png\" style=\"float: right; width: 93px; height: 129px;\">﻿</p><p>sadjasgdjhasd</p><p>asdjgsadjghasda</p><p>sdashdghadasd</p><p>asdhgasjdgasd</p><p>asdhhsaghdghjadgasd</p><p>asdhgjhdghasd</p><p>sadkashdasd</p><p>sakdhkasd</p><p>asdjhhsadhkasjhdjsahdjsad</p>', 'article-thumb/9aa78d6e-65cf-4d0b-834f-0ff8c3ea356e.png', '2a6ccea5-90dc-4d41-1362-b361909e9045', 'dd', '2020-10-10 12:03:00', 0),
+(80, 'ad', 'dasd', '<p>dsad</p>', 'article-thumb/3e715df5-cf7d-4ae6-8703-58d6e36037b2.png', 'ef5a8017-3857-4c72-283e-0299abe2287b', 'dasd', '2020-10-09 16:53:00', 1),
+(81, 'add', 'dasd', '<p>dsad</p>', 'article-thumb/2855b00b-0dca-45bc-9329-830f2a268c88.png', 'ef5a8017-3857-4c72-283e-02d99abe2287b', 'dasd', '2020-10-09 16:53:00', 1);
 
 -- --------------------------------------------------------
 
@@ -528,7 +530,7 @@ ALTER TABLE `tb_article_set`
 -- AUTO_INCREMENT for table `tb_banner`
 --
 ALTER TABLE `tb_banner`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `tb_contact`
@@ -540,19 +542,19 @@ ALTER TABLE `tb_contact`
 -- AUTO_INCREMENT for table `tb_fasilitas`
 --
 ALTER TABLE `tb_fasilitas`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tb_files`
 --
 ALTER TABLE `tb_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `tb_galeri`
 --
 ALTER TABLE `tb_galeri`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tb_karir`
@@ -570,13 +572,13 @@ ALTER TABLE `tb_kemahasiswaan`
 -- AUTO_INCREMENT for table `tb_manage`
 --
 ALTER TABLE `tb_manage`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tb_news`
 --
 ALTER TABLE `tb_news`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT for table `tb_prodi`
